@@ -50,7 +50,7 @@ let colors = {
   'grey-darker': '#606f7b',
   'grey-dark': '#8795a1',
   grey: '#b8c2cc',
-  'grey-light': '#dae1e7',
+  'grey-light': '#DEDEDE',
   'grey-lighter': '#f1f5f8',
   'grey-lightest': '#f8fafc',
   white: '#ffffff',
@@ -98,7 +98,7 @@ let colors = {
   'blue-darkest': '#12283a',
   'blue-darker': '#1c3d5a',
   'blue-dark': '#2779bd',
-  blue: '#3490dc',
+  blue: '#1747b0',
   'blue-light': '#6cb2eb',
   'blue-lighter': '#bcdefa',
   'blue-lightest': '#eff8ff',
@@ -745,7 +745,7 @@ module.exports = {
   */
 
   shadows: {
-    default: '0 2px 4px 0 rgba(0,0,0,0.10)',
+    default: '0 1px 7px 0 rgba(36, 37, 38, 0.08)',
     md: '0 4px 8px 0 rgba(0,0,0,0.12), 0 2px 4px 0 rgba(0,0,0,0.08)',
     lg: '0 15px 30px 0 rgba(0,0,0,0.11), 0 5px 15px 0 rgba(0,0,0,0.08)',
     inner: 'inset 0 2px 4px 0 rgba(0,0,0,0.06)',
@@ -924,12 +924,7 @@ module.exports = {
   |
   */
 
-  plugins: [
-    require('tailwindcss/plugins/container')({
-      // center: true,
-      // padding: '1rem',
-    })
-  ],
+  plugins: [],
 
   /*
   |-----------------------------------------------------------------------------
