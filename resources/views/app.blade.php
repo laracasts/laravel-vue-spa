@@ -20,7 +20,7 @@
 		<div class="section pb-10">
 			<div class="container">
 				<main class="flex">
-					<aside class="w-64 pt-8">
+					<aside class="w-64 pt-8 flex-no-shrink">
 						<div class="mb-10">
 							<h5 class="uppercase font-bold mb-5 text-base">The Brand</h5>
 
@@ -44,7 +44,7 @@
 						</div>
 					</aside>
 
-					<div class="primary flex-1">
+					<div class="primary flex-1X">
 						<router-view></router-view>
 					</div>
 				</main>
