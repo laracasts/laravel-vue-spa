@@ -274,6 +274,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -461,6 +471,108 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -491,6 +603,72 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1365,18 +1543,8 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "h1",
-    { staticClass: "font-normal text-3xl text-grey-darkest leading-none" },
-    [_vm._v("\n    Loaders and Animations\n")]
-  )
-}
+var render = function () {}
 var staticRenderFns = []
-render._withStripped = true
 
 
 
@@ -1681,13 +1849,196 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "h1",
-    { staticClass: "font-normal text-3xl text-grey-darkest leading-none" },
-    [_vm._v("\n    Mascot\n")]
-  )
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c(
+        "h1",
+        {
+          staticClass:
+            "font-normal text-3xl text-grey-darkest leading-none mb-12"
+        },
+        [_vm._v('\n        Meet "Lary"\n    ')]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex mb-12" }, [
+        _c("div", { staticClass: "mr-8 flex flex-col items-center" }, [
+          _c("img", {
+            staticClass: "mb-4",
+            attrs: {
+              src: "/images/mascot/larydefault.svg",
+              alt: "Laracasts Default Mascot"
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass:
+                "border border-grey-light px-8 py-2 rounded-full text-black font-bold text-xs",
+              attrs: { href: "/images/mascot/larydefault.svg" }
+            },
+            [_vm._v("larydefault.svg")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "leading-normal w-64 mt-8" }, [
+          _vm._v(
+            "\n            Quirky. Dynamic. Smartsy. He’s got it all. Who wouldn’t want\n            him?\n        "
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "border border-grey-lighter rounded-lg flex flex-col items-center justify-center pt-6 pb-6 px-8 mr-6",
+            staticStyle: { width: "153px", height: "219px" }
+          },
+          [
+            _c(
+              "a",
+              {
+                staticClass: "mb-5 mt-auto",
+                attrs: { href: "/images/mascot/larypeek.svg" }
+              },
+              [
+                _c("img", {
+                  attrs: {
+                    src: "/images/mascot/larypeek.svg",
+                    alt: "Laracasts Peeking Mascot"
+                  }
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "text-grey text-2xs hover:underline mt-auto",
+                attrs: { href: "/images/mascot/larypeek.svg" }
+              },
+              [_vm._v("larypeek.svg")]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "border border-grey-lighter rounded-lg flex flex-col items-center justify-center pt-6 pb-6 px-8 mr-6",
+            staticStyle: { width: "153px", height: "219px" }
+          },
+          [
+            _c(
+              "a",
+              {
+                staticClass: "mb-5 mt-auto",
+                attrs: { href: "/images/mascot/larywink.svg" }
+              },
+              [
+                _c("img", {
+                  attrs: {
+                    src: "/images/mascot/larywink.svg",
+                    alt: "Laracasts Winking Mascot"
+                  }
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "text-grey text-2xs hover:underline mt-auto",
+                attrs: { href: "/images/mascot/larywink.svg" }
+              },
+              [_vm._v("larywink.svg")]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "border border-grey-lighter rounded-lg flex flex-col items-center justify-center pt-6 pb-6 px-8 mr-6",
+            staticStyle: { width: "153px", height: "219px" }
+          },
+          [
+            _c(
+              "a",
+              {
+                staticClass: "mb-5 mt-auto",
+                attrs: { href: "/images/mascot/larysmart.svg" }
+              },
+              [
+                _c("img", {
+                  attrs: {
+                    src: "/images/mascot/larysmart.svg",
+                    alt: "Laracasts Smart Mascot"
+                  }
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "text-grey text-2xs hover:underline mt-auto",
+                attrs: { href: "/images/mascot/larysmart.svg" }
+              },
+              [_vm._v("larysmart.svg")]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "border border-grey-lighter rounded-lg flex flex-col items-center justify-center pt-6 pb-6 px-8",
+            staticStyle: { width: "153px", height: "219px" }
+          },
+          [
+            _c(
+              "a",
+              {
+                staticClass: "mb-5 mt-auto",
+                attrs: { href: "/images/mascot/larylab.svg" }
+              },
+              [
+                _c("img", {
+                  staticStyle: { width: "74px" },
+                  attrs: {
+                    src: "/images/mascot/larylab.svg",
+                    alt: "Laracasts Experimenting Mascot"
+                  }
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "text-grey text-2xs hover:underline mt-auto",
+                attrs: { href: "/images/mascot/larylab.svg" }
+              },
+              [_vm._v("larylab.svg")]
+            )
+          ]
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -1733,13 +2084,127 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "h1",
-    { staticClass: "font-normal text-3xl text-grey-darkest leading-none" },
-    [_vm._v("\n    Typography\n")]
-  )
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c(
+        "h1",
+        {
+          staticClass:
+            "font-normal text-3xl text-grey-darkest leading-none mb-8"
+        },
+        [_vm._v("\n        Open Sans\n    ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "rounded-lg bg-grey-lightest py-12 px-16 mb-10",
+          staticStyle: { "max-width": "522px" }
+        },
+        [
+          _c("div", { staticClass: "flex justify-end mb-10 items-center" }, [
+            _c("div", {
+              staticClass: "rounded-full bg-black shadow w-8 h-8 mr-3"
+            }),
+            _vm._v(" "),
+            _c("span", { staticClass: "text-xs" }, [_vm._v("#222222")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex justify-between mb-6" }, [
+            _c("strong", { staticClass: "text-xl font-light" }, [
+              _vm._v("Open Sans Light")
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "text-xl font-light" }, [_vm._v("300")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex justify-between mb-6" }, [
+            _c("strong", { staticClass: "text-xl font-normal" }, [
+              _vm._v("Open Sans Regular")
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "text-xl font-normal" }, [_vm._v("400")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex justify-between mb-6" }, [
+            _c("strong", { staticClass: "text-xl font-semibold" }, [
+              _vm._v("Open Sans Semi Bold")
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "text-xl font-semibold" }, [
+              _vm._v("600")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex justify-between" }, [
+            _c("strong", { staticClass: "text-xl font-bold" }, [
+              _vm._v("Open Sans Bold")
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "text-xl font-bold" }, [_vm._v("700")])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "rounded-lg bg-black text-white py-12 px-16 mb-8",
+          staticStyle: { "max-width": "522px" }
+        },
+        [
+          _c("div", { staticClass: "flex justify-end mb-10 items-center" }, [
+            _c("div", {
+              staticClass: "rounded-full bg-white shadow w-8 h-8 mr-3"
+            }),
+            _vm._v(" "),
+            _c("span", { staticClass: "text-xs" }, [_vm._v("#FFFFFF")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex justify-between mb-6" }, [
+            _c("strong", { staticClass: "text-xl font-light" }, [
+              _vm._v("Open Sans Light")
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "text-xl font-light" }, [_vm._v("300")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex justify-between mb-6" }, [
+            _c("strong", { staticClass: "text-xl font-normal" }, [
+              _vm._v("Open Sans Regular")
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "text-xl font-normal" }, [_vm._v("400")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex justify-between mb-6" }, [
+            _c("strong", { staticClass: "text-xl font-semibold" }, [
+              _vm._v("Open Sans Semi Bold")
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "text-xl font-semibold" }, [
+              _vm._v("600")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex justify-between" }, [
+            _c("strong", { staticClass: "text-xl font-bold" }, [
+              _vm._v("Open Sans Bold")
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "text-xl font-bold" }, [_vm._v("700")])
+          ])
+        ]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 

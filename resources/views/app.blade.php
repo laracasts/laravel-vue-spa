@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>Laracasts Assets</title>
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 	<link rel="stylesheet" href="/css/app.css">
 </head>
 
@@ -44,7 +44,7 @@
 						</div>
 					</aside>
 
-					<div class="primary flex-1X">
+					<div class="primary flex-1">
 						<router-view></router-view>
 					</div>
 				</main>
