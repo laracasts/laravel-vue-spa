@@ -19,8 +19,8 @@
                 <a
                     href="/images/logo.svg"
                     class="border border-grey-light px-8 py-2 rounded-full text-black font-bold text-xs"
-                    >logo.svg</a
-                >
+                    >logo.svg
+                </a>
             </div>
         </div>
 
