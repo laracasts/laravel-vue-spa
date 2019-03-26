@@ -19,11 +19,7 @@
             <div ref="lottie" class="w-64" style="height: 457px"></div>
         </div>
 
-        <a
-            href="/images/logo.svg"
-            class="border border-grey-light px-10 py-2 rounded-full text-black font-bold text-xs"
-            >spinner.zip
-        </a>
+        <a href="/laracasts-spinner.zip" class="button">spinner.zip</a>
     </div>
 </template>
 

@@ -13,7 +13,9 @@
 	<div id="app">
 		<header class="section py-6 mb-8" style="background: url('/images/splash.svg') 0 15px no-repeat;">
 			<h1>
-				<img alt="Laracasts" src="/images/logo.svg">
+				<router-link to="/">
+					<img alt="Laracasts" src="/images/logo.svg">
+				</router-link>
 			</h1>
 		</header>
 

@@ -1,6 +1,50 @@
 /******/ (function(modules) { // webpackBootstrap
+/******/ 	// install a JSONP callback for chunk loading
+/******/ 	function webpackJsonpCallback(data) {
+/******/ 		var chunkIds = data[0];
+/******/ 		var moreModules = data[1];
+/******/
+/******/
+/******/ 		// add "moreModules" to the modules object,
+/******/ 		// then flag all "chunkIds" as loaded and fire callback
+/******/ 		var moduleId, chunkId, i = 0, resolves = [];
+/******/ 		for(;i < chunkIds.length; i++) {
+/******/ 			chunkId = chunkIds[i];
+/******/ 			if(installedChunks[chunkId]) {
+/******/ 				resolves.push(installedChunks[chunkId][0]);
+/******/ 			}
+/******/ 			installedChunks[chunkId] = 0;
+/******/ 		}
+/******/ 		for(moduleId in moreModules) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/ 				modules[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 		if(parentJsonpFunction) parentJsonpFunction(data);
+/******/
+/******/ 		while(resolves.length) {
+/******/ 			resolves.shift()();
+/******/ 		}
+/******/
+/******/ 	};
+/******/
+/******/
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
+/******/
+/******/ 	// object to store loaded and loading chunks
+/******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 	// Promise = chunk loading, 0 = chunk loaded
+/******/ 	var installedChunks = {
+/******/ 		"/js/app": 0
+/******/ 	};
+/******/
+/******/
+/******/
+/******/ 	// script path function
+/******/ 	function jsonpScriptSrc(chunkId) {
+/******/ 		return __webpack_require__.p + "" + ({"vendors~loaders-and-animations.bundle":"vendors~loaders-and-animations.bundle","loaders-and-animations.bundle":"loaders-and-animations.bundle"}[chunkId]||chunkId) + ".js"
+/******/ 	}
 /******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
@@ -26,6 +70,64 @@
 /******/ 		return module.exports;
 /******/ 	}
 /******/
+/******/ 	// This file contains only the entry chunk.
+/******/ 	// The chunk loading function for additional chunks
+/******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
+/******/ 		var promises = [];
+/******/
+/******/
+/******/ 		// JSONP chunk loading for javascript
+/******/
+/******/ 		var installedChunkData = installedChunks[chunkId];
+/******/ 		if(installedChunkData !== 0) { // 0 means "already installed".
+/******/
+/******/ 			// a Promise means "currently loading".
+/******/ 			if(installedChunkData) {
+/******/ 				promises.push(installedChunkData[2]);
+/******/ 			} else {
+/******/ 				// setup Promise in chunk cache
+/******/ 				var promise = new Promise(function(resolve, reject) {
+/******/ 					installedChunkData = installedChunks[chunkId] = [resolve, reject];
+/******/ 				});
+/******/ 				promises.push(installedChunkData[2] = promise);
+/******/
+/******/ 				// start chunk loading
+/******/ 				var script = document.createElement('script');
+/******/ 				var onScriptComplete;
+/******/
+/******/ 				script.charset = 'utf-8';
+/******/ 				script.timeout = 120;
+/******/ 				if (__webpack_require__.nc) {
+/******/ 					script.setAttribute("nonce", __webpack_require__.nc);
+/******/ 				}
+/******/ 				script.src = jsonpScriptSrc(chunkId);
+/******/
+/******/ 				onScriptComplete = function (event) {
+/******/ 					// avoid mem leaks in IE.
+/******/ 					script.onerror = script.onload = null;
+/******/ 					clearTimeout(timeout);
+/******/ 					var chunk = installedChunks[chunkId];
+/******/ 					if(chunk !== 0) {
+/******/ 						if(chunk) {
+/******/ 							var errorType = event && (event.type === 'load' ? 'missing' : event.type);
+/******/ 							var realSrc = event && event.target && event.target.src;
+/******/ 							var error = new Error('Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')');
+/******/ 							error.type = errorType;
+/******/ 							error.request = realSrc;
+/******/ 							chunk[1](error);
+/******/ 						}
+/******/ 						installedChunks[chunkId] = undefined;
+/******/ 					}
+/******/ 				};
+/******/ 				var timeout = setTimeout(function(){
+/******/ 					onScriptComplete({ type: 'timeout', target: script });
+/******/ 				}, 120000);
+/******/ 				script.onerror = script.onload = onScriptComplete;
+/******/ 				document.head.appendChild(script);
+/******/ 			}
+/******/ 		}
+/******/ 		return Promise.all(promises);
+/******/ 	};
 /******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
@@ -79,6 +181,16 @@
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "/";
 /******/
+/******/ 	// on error function for async loading
+/******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
+/******/
+/******/ 	var jsonpArray = window["webpackJsonp"] = window["webpackJsonp"] || [];
+/******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
+/******/ 	jsonpArray.push = webpackJsonpCallback;
+/******/ 	jsonpArray = jsonpArray.slice();
+/******/ 	for(var i = 0; i < jsonpArray.length; i++) webpackJsonpCallback(jsonpArray[i]);
+/******/ 	var parentJsonpFunction = oldJsonpFunction;
+/******/
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 0);
@@ -95,9 +207,6 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
 //
 //
 //
@@ -255,19 +364,131 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/LoadersAndAnimations.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/LoadersAndAnimations.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -297,14 +518,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -446,12 +659,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -465,8 +672,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -688,20 +893,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -1345,18 +1536,6 @@ var render = function() {
       _c("div", { staticClass: "flex flex-col items-center mr-4" }, [
         _c("div", {
           staticClass: "rounded-full w-5 h-5 shadow mb-3",
-          style: "background: " + _vm.from
-        }),
-        _vm._v(" "),
-        _c("p", {
-          staticClass: "text-xs",
-          domProps: { textContent: _vm._s(_vm.from) }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "flex flex-col items-center" }, [
-        _c("div", {
-          staticClass: "rounded-full w-5 h-5 shadow mb-3",
           style: "background: " + _vm.to
         }),
         _vm._v(" "),
@@ -1364,11 +1543,23 @@ var render = function() {
           staticClass: "text-xs",
           domProps: { textContent: _vm._s(_vm.to) }
         })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex flex-col items-center" }, [
+        _c("div", {
+          staticClass: "rounded-full w-5 h-5 shadow mb-3",
+          style: "background: " + _vm.from
+        }),
+        _vm._v(" "),
+        _c("p", {
+          staticClass: "text-xs",
+          domProps: { textContent: _vm._s(_vm.from) }
+        })
       ])
     ]),
     _vm._v(" "),
     _c("h5", {
-      staticClass: "uppercase text-2xs text-grey-light font-normal",
+      staticClass: "uppercase text-2xs text-grey font-normal",
       domProps: { textContent: _vm._s(_vm.name) }
     })
   ])
@@ -1416,23 +1607,23 @@ var render = function() {
         { staticClass: "flex" },
         [
           _c("color-range", {
-            attrs: { from: "#EC454F", to: "#F44881", name: "Laravel" }
+            attrs: { to: "#EC454F", from: "#F44881", name: "Laravel" }
           }),
           _vm._v(" "),
           _c("color-range", {
-            attrs: { from: "#637BFF", to: "#21C8F6", name: "PHP" }
+            attrs: { to: "#637BFF", from: "#21C8F6", name: "PHP" }
           }),
           _vm._v(" "),
           _c("color-range", {
-            attrs: { from: "#50A88D", to: "#6EDCC4", name: "Testing" }
+            attrs: { to: "#50A88D", from: "#6EDCC4", name: "Testing" }
           }),
           _vm._v(" "),
           _c("color-range", {
-            attrs: { from: "#E59D3E", to: "#F19A1A", name: "JavaScript" }
+            attrs: { to: "#E59D3E", from: "#F19A1A", name: "JavaScript" }
           }),
           _vm._v(" "),
           _c("color-range", {
-            attrs: { from: "#8465E5", to: "#AA76B9", name: "Tooling" }
+            attrs: { to: "#8465E5", from: "#AA76B9", name: "Tooling" }
           })
         ],
         1
@@ -1519,32 +1710,261 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "h1",
-    { staticClass: "font-normal text-3xl text-grey-darkest leading-none" },
-    [_vm._v("\n    Illustrations\n")]
-  )
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c(
+        "h1",
+        {
+          staticClass:
+            "font-normal text-3xl text-grey-darkest leading-none mb-10"
+        },
+        [_vm._v("\n        Illustrations\n    ")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex mb-12" }, [
+        _c(
+          "picture",
+          {
+            staticClass:
+              "rounded-lg bg-blue py-6 px-10 mr-10 flex-1 flex justify-center items-center"
+          },
+          [
+            _c("img", {
+              staticClass: "w-32",
+              attrs: {
+                src: "/images/illustrations/clarity.svg",
+                alt: "Clarity Illustration"
+              }
+            })
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticStyle: { flex: "1.4" } }, [
+          _c("h2", { staticClass: "font-light text-xl mb-4 mt-4" }, [
+            _vm._v("Clarity")
+          ]),
+          _vm._v(" "),
+          _c(
+            "p",
+            {
+              staticClass:
+                "leading-relaxed text-grey-darker text-sm mb-8 font-light"
+            },
+            [
+              _vm._v(
+                "\n                Learning isn’t easy. Keep your mind clear and don’t fill it\n                with expectations. Sponge brain is the best brain.\n            "
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "button",
+              attrs: { href: "/images/illustrations/clarity.svg" }
+            },
+            [_vm._v("\n                clarity.svg\n            ")]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex mb-12" }, [
+        _c(
+          "picture",
+          {
+            staticClass:
+              "rounded-lg bg-blue py-6 px-10 mr-10 flex flex-1 justify-center items-center"
+          },
+          [
+            _c("img", {
+              staticClass: "w-32",
+              attrs: {
+                src: "/images/illustrations/fun.svg",
+                alt: "Fun Illustration"
+              }
+            })
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticStyle: { flex: "1.4" } }, [
+          _c("h2", { staticClass: "font-light text-xl mb-4 mt-4" }, [
+            _vm._v("Fun")
+          ]),
+          _vm._v(" "),
+          _c(
+            "p",
+            {
+              staticClass:
+                "leading-relaxed text-grey-darker text-sm mb-8 font-light"
+            },
+            [
+              _vm._v(
+                "\n                If you’re not having fun, you’re doing something wrong. You\n                know what they say, love what you do and you’ll never work a\n                day in your life.\n            "
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "button",
+              attrs: { href: "/images/illustrations/fun.svg" }
+            },
+            [_vm._v("\n                fun.svg\n            ")]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex mb-12" }, [
+        _c(
+          "picture",
+          {
+            staticClass:
+              "rounded-lg bg-blue py-6 px-10 mr-10 flex flex-1 justify-center items-center"
+          },
+          [
+            _c("img", {
+              staticClass: "w-32",
+              attrs: {
+                src: "/images/illustrations/experiment.svg",
+                alt: "Experiment Illustration"
+              }
+            })
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticStyle: { flex: "1.4" } }, [
+          _c("h2", { staticClass: "font-light text-xl mb-4 mt-4" }, [
+            _vm._v("Experiment")
+          ]),
+          _vm._v(" "),
+          _c(
+            "p",
+            {
+              staticClass:
+                "leading-relaxed text-grey-darker text-sm mb-8 font-light"
+            },
+            [
+              _vm._v(
+                "\n                If you’re not having experiment, you’re doing something\n                wrong. You know what they say, love what you do and you’ll\n                never work a day in your life.\n            "
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "button",
+              attrs: { href: "/images/illustrations/experiment.svg" }
+            },
+            [_vm._v("\n                experiment.svg\n            ")]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex mb-12" }, [
+        _c(
+          "picture",
+          {
+            staticClass:
+              "rounded-lg bg-blue py-6 px-10 mr-10 flex flex-1 justify-center items-center"
+          },
+          [
+            _c("img", {
+              staticClass: "w-32",
+              attrs: {
+                src: "/images/illustrations/strength.svg",
+                alt: "Strength Illustration"
+              }
+            })
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticStyle: { flex: "1.4" } }, [
+          _c("h2", { staticClass: "font-light text-xl mb-4 mt-4" }, [
+            _vm._v("Strength")
+          ]),
+          _vm._v(" "),
+          _c(
+            "p",
+            {
+              staticClass:
+                "leading-relaxed text-grey-darker text-sm mb-8 font-light"
+            },
+            [
+              _vm._v(
+                "\n                If you’re not having strength, you’re doing something wrong.\n                You know what they say, love what you do and you’ll never\n                work a day in your life.\n            "
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "button",
+              attrs: { href: "/images/illustrations/strength.svg" }
+            },
+            [_vm._v("\n                strength.svg\n            ")]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex mb-12" }, [
+        _c(
+          "picture",
+          {
+            staticClass:
+              "rounded-lg bg-blue py-6 px-10 mr-10 flex flex-1 justify-center items-center"
+          },
+          [
+            _c("img", {
+              staticClass: "w-32",
+              attrs: {
+                src: "/images/illustrations/information.svg",
+                alt: "Information Illustration"
+              }
+            })
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticStyle: { flex: "1.4" } }, [
+          _c("h2", { staticClass: "font-light text-xl mb-4 mt-4" }, [
+            _vm._v("Information")
+          ]),
+          _vm._v(" "),
+          _c(
+            "p",
+            {
+              staticClass:
+                "leading-relaxed text-grey-darker text-sm mb-8 font-light"
+            },
+            [
+              _vm._v(
+                "\n                If you’re not having information, you’re doing something\n                wrong. You know what they say, love what you do and you’ll\n                never work a day in your life.\n            "
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "button",
+              attrs: { href: "/images/illustrations/information.svg" }
+            },
+            [_vm._v("\n                information.svg\n            ")]
+          )
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/LoadersAndAnimations.vue?vue&type=template&id=10167db1&":
-/*!***********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/LoadersAndAnimations.vue?vue&type=template&id=10167db1& ***!
-  \***********************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {}
-var staticRenderFns = []
 
 
 
@@ -1602,11 +2022,7 @@ var staticRenderFns = [
           _vm._v(" "),
           _c(
             "a",
-            {
-              staticClass:
-                "border border-grey-light px-8 py-2 rounded-full text-black font-bold text-xs",
-              attrs: { href: "/images/logo.svg" }
-            },
+            { staticClass: "button", attrs: { href: "/images/logo.svg" } },
             [_vm._v("logo.svg")]
           )
         ])
@@ -1639,11 +2055,10 @@ var staticRenderFns = [
           _c(
             "a",
             {
-              staticClass:
-                "border border-grey-light px-8 py-2 rounded-full text-black font-bold text-xs",
+              staticClass: "button",
               attrs: { href: "/images/negative-logo.svg" }
             },
-            [_vm._v("negative-logo.svg")]
+            [_vm._v("\n                negative-logo.svg\n            ")]
           )
         ])
       ]),
@@ -1673,11 +2088,10 @@ var staticRenderFns = [
           _c(
             "a",
             {
-              staticClass:
-                "border border-grey-light px-8 py-2 rounded-full text-black font-bold text-xs",
+              staticClass: "button",
               attrs: { href: "/images/pure-negative-logo.svg" }
             },
-            [_vm._v("pure-negative-logo.svg")]
+            [_vm._v("\n                pure-negative-logo.svg\n            ")]
           )
         ])
       ])
@@ -1746,12 +2160,8 @@ var staticRenderFns = [
           _vm._v(" "),
           _c(
             "a",
-            {
-              staticClass:
-                "border border-grey-light px-8 py-2 rounded-full text-black font-bold text-xs",
-              attrs: { href: "/images/logo.svg" }
-            },
-            [_vm._v("symbol-original.svg")]
+            { staticClass: "button", attrs: { href: "/images/logo.svg" } },
+            [_vm._v("\n                symbol-original.svg\n            ")]
           )
         ])
       ]),
@@ -1783,11 +2193,10 @@ var staticRenderFns = [
           _c(
             "a",
             {
-              staticClass:
-                "border border-grey-light px-8 py-2 rounded-full text-black font-bold text-xs",
+              staticClass: "button",
               attrs: { href: "/images/symbol-negative.svg" }
             },
-            [_vm._v("symbol-negative.svg")]
+            [_vm._v("\n                symbol-negative.svg\n            ")]
           )
         ])
       ]),
@@ -1817,11 +2226,10 @@ var staticRenderFns = [
           _c(
             "a",
             {
-              staticClass:
-                "border border-grey-light px-8 py-2 rounded-full text-black font-bold text-xs",
+              staticClass: "button",
               attrs: { href: "/images/symbol-pure-negative.svg" }
             },
-            [_vm._v("symbol-pure-negative.svg")]
+            [_vm._v("\n                symbol-pure-negative.svg\n            ")]
           )
         ])
       ])
@@ -1879,15 +2287,14 @@ var staticRenderFns = [
           _c(
             "a",
             {
-              staticClass:
-                "border border-grey-light px-8 py-2 rounded-full text-black font-bold text-xs",
+              staticClass: "button",
               attrs: { href: "/images/mascot/larydefault.svg" }
             },
-            [_vm._v("larydefault.svg")]
+            [_vm._v("\n                larydefault.svg\n            ")]
           )
         ]),
         _vm._v(" "),
-        _c("p", { staticClass: "leading-normal w-64 mt-8" }, [
+        _c("p", { staticClass: "leading-relaxed w-64 mt-8" }, [
           _vm._v(
             "\n            Quirky. Dynamic. Smartsy. He’s got it all. Who wouldn’t want\n            him?\n        "
           )
@@ -2243,199 +2650,222 @@ var staticRenderFns = [
         [_vm._v("\n        Wallpapers\n    ")]
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "mb-12" }, [
-        _c("a", { attrs: { href: "/images/wallpapers/clarity.png" } }, [
-          _c("img", {
-            staticClass: "mb-4",
-            attrs: {
-              src: "/images/wallpapers/thumbnails/clarity.png",
-              alt: "Inspire Clarity Laracasts Wallpaper"
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "flex justify-between items-center" }, [
-          _c("h2", { staticClass: "font-normal text-base" }, [
-            _vm._v("Inspire Clarity")
+      _c(
+        "div",
+        { staticClass: "mb-12", staticStyle: { "max-width": "439px" } },
+        [
+          _c("a", { attrs: { href: "/images/wallpapers/clarity.png" } }, [
+            _c("img", {
+              staticClass: "mb-4",
+              attrs: {
+                src: "/images/wallpapers/thumbnails/clarity.png",
+                alt: "Inspire Clarity Laracasts Wallpaper"
+              }
+            })
           ]),
           _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass:
-                "border border-grey-light px-8 py-2 rounded-full text-black font-bold text-xs",
-              attrs: { href: "/images/wallpapers/clarity.png" }
-            },
-            [_vm._v("clarity.png")]
-          )
-        ])
-      ]),
+          _c("div", { staticClass: "flex justify-between items-center" }, [
+            _c("h2", { staticClass: "font-normal text-base" }, [
+              _vm._v("Inspire Clarity")
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "button",
+                attrs: { href: "/images/wallpapers/clarity.png" }
+              },
+              [_vm._v("\n                clarity.png\n            ")]
+            )
+          ])
+        ]
+      ),
       _vm._v(" "),
-      _c("div", { staticClass: "mb-12" }, [
-        _c("a", { attrs: { href: "/images/wallpapers/strength.png" } }, [
-          _c("img", {
-            staticClass: "mb-4",
-            attrs: {
-              src: "/images/wallpapers/thumbnails/strength.png",
-              alt: "Inspire Strength Laracasts Wallpaper"
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "flex justify-between items-center" }, [
-          _c("h2", { staticClass: "font-normal text-base" }, [
-            _vm._v("Inspire Strength")
+      _c(
+        "div",
+        { staticClass: "mb-12", staticStyle: { "max-width": "439px" } },
+        [
+          _c("a", { attrs: { href: "/images/wallpapers/strength.png" } }, [
+            _c("img", {
+              staticClass: "mb-4",
+              attrs: {
+                src: "/images/wallpapers/thumbnails/strength.png",
+                alt: "Inspire Strength Laracasts Wallpaper"
+              }
+            })
           ]),
           _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass:
-                "border border-grey-light px-8 py-2 rounded-full text-black font-bold text-xs",
-              attrs: { href: "/images/wallpapers/strength.png" }
-            },
-            [_vm._v("strength.png")]
-          )
-        ])
-      ]),
+          _c("div", { staticClass: "flex justify-between items-center" }, [
+            _c("h2", { staticClass: "font-normal text-base" }, [
+              _vm._v("Inspire Strength")
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "button",
+                attrs: { href: "/images/wallpapers/strength.png" }
+              },
+              [_vm._v("\n                strength.png\n            ")]
+            )
+          ])
+        ]
+      ),
       _vm._v(" "),
-      _c("div", { staticClass: "mb-12" }, [
-        _c("a", { attrs: { href: "/images/wallpapers/knowledge.png" } }, [
-          _c("img", {
-            staticClass: "mb-4",
-            attrs: {
-              src: "/images/wallpapers/thumbnails/knowledge.png",
-              alt: "Inspire Knowledge Laracasts Wallpaper"
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "flex justify-between items-center" }, [
-          _c("h2", { staticClass: "font-normal text-base" }, [
-            _vm._v("Inspire Knowledge")
+      _c(
+        "div",
+        { staticClass: "mb-12", staticStyle: { "max-width": "439px" } },
+        [
+          _c("a", { attrs: { href: "/images/wallpapers/knowledge.png" } }, [
+            _c("img", {
+              staticClass: "mb-4",
+              attrs: {
+                src: "/images/wallpapers/thumbnails/knowledge.png",
+                alt: "Inspire Knowledge Laracasts Wallpaper"
+              }
+            })
           ]),
           _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass:
-                "border border-grey-light px-8 py-2 rounded-full text-black font-bold text-xs",
-              attrs: { href: "/images/wallpapers/knowledge.png" }
-            },
-            [_vm._v("knowledge.png")]
-          )
-        ])
-      ]),
+          _c("div", { staticClass: "flex justify-between items-center" }, [
+            _c("h2", { staticClass: "font-normal text-base" }, [
+              _vm._v("Inspire Knowledge")
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "button",
+                attrs: { href: "/images/wallpapers/knowledge.png" }
+              },
+              [_vm._v("\n                knowledge.png\n            ")]
+            )
+          ])
+        ]
+      ),
       _vm._v(" "),
-      _c("div", { staticClass: "mb-12" }, [
-        _c("a", { attrs: { href: "/images/wallpapers/fun.png" } }, [
-          _c("img", {
-            staticClass: "mb-4",
-            attrs: {
-              src: "/images/wallpapers/thumbnails/fun.png",
-              alt: "Inspire Fun Laracasts Wallpaper"
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "flex justify-between items-center" }, [
-          _c("h2", { staticClass: "font-normal text-base" }, [
-            _vm._v("Inspire Fun")
+      _c(
+        "div",
+        { staticClass: "mb-12", staticStyle: { "max-width": "439px" } },
+        [
+          _c("a", { attrs: { href: "/images/wallpapers/fun.png" } }, [
+            _c("img", {
+              staticClass: "mb-4",
+              attrs: {
+                src: "/images/wallpapers/thumbnails/fun.png",
+                alt: "Inspire Fun Laracasts Wallpaper"
+              }
+            })
           ]),
           _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass:
-                "border border-grey-light px-8 py-2 rounded-full text-black font-bold text-xs",
-              attrs: { href: "/images/wallpapers/fun.png" }
-            },
-            [_vm._v("fun.png")]
-          )
-        ])
-      ]),
+          _c("div", { staticClass: "flex justify-between items-center" }, [
+            _c("h2", { staticClass: "font-normal text-base" }, [
+              _vm._v("Inspire Fun")
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "button",
+                attrs: { href: "/images/wallpapers/fun.png" }
+              },
+              [_vm._v("\n                fun.png\n            ")]
+            )
+          ])
+        ]
+      ),
       _vm._v(" "),
-      _c("div", { staticClass: "mb-12" }, [
-        _c("a", { attrs: { href: "/images/wallpapers/experimenting.png" } }, [
-          _c("img", {
-            staticClass: "mb-4",
-            attrs: {
-              src: "/images/wallpapers/thumbnails/experimenting.png",
-              alt: "Inspire Experimenting Laracasts Wallpaper"
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "flex justify-between items-center" }, [
-          _c("h2", { staticClass: "font-normal text-base" }, [
-            _vm._v("Inspire Experimenting")
+      _c(
+        "div",
+        { staticClass: "mb-12", staticStyle: { "max-width": "439px" } },
+        [
+          _c("a", { attrs: { href: "/images/wallpapers/experimenting.png" } }, [
+            _c("img", {
+              staticClass: "mb-4",
+              attrs: {
+                src: "/images/wallpapers/thumbnails/experimenting.png",
+                alt: "Inspire Experimenting Laracasts Wallpaper"
+              }
+            })
           ]),
           _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass:
-                "border border-grey-light px-8 py-2 rounded-full text-black font-bold text-xs",
-              attrs: { href: "/images/wallpapers/experimenting.png" }
-            },
-            [_vm._v("experimenting.png")]
-          )
-        ])
-      ]),
+          _c("div", { staticClass: "flex justify-between items-center" }, [
+            _c("h2", { staticClass: "font-normal text-base" }, [
+              _vm._v("Inspire Experimenting")
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "button",
+                attrs: { href: "/images/wallpapers/experimenting.png" }
+              },
+              [_vm._v("\n                experimenting.png\n            ")]
+            )
+          ])
+        ]
+      ),
       _vm._v(" "),
-      _c("div", { staticClass: "mb-12" }, [
-        _c("a", { attrs: { href: "/images/wallpapers/extra.png" } }, [
-          _c("img", {
-            staticClass: "mb-4",
-            attrs: {
-              src: "/images/wallpapers/thumbnails/extra.png",
-              alt: "Inspire Extra Laracasts Wallpaper"
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "flex justify-between items-center" }, [
-          _c("h2", { staticClass: "font-normal text-base" }, [_vm._v("Extra")]),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass:
-                "border border-grey-light px-8 py-2 rounded-full text-black font-bold text-xs",
-              attrs: { href: "/images/wallpapers/extra.png" }
-            },
-            [_vm._v("extra.png")]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "mb-12" }, [
-        _c("a", { attrs: { href: "/images/wallpapers/inspire-me.png" } }, [
-          _c("img", {
-            staticClass: "mb-4",
-            attrs: {
-              src: "/images/wallpapers/thumbnails/inspire-me.png",
-              alt: "Inspire Extra Laracasts Wallpaper"
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "flex justify-between items-center" }, [
-          _c("h2", { staticClass: "font-normal text-base" }, [
-            _vm._v("Inspire Me")
+      _c(
+        "div",
+        { staticClass: "mb-12", staticStyle: { "max-width": "439px" } },
+        [
+          _c("a", { attrs: { href: "/images/wallpapers/extra.png" } }, [
+            _c("img", {
+              staticClass: "mb-4",
+              attrs: {
+                src: "/images/wallpapers/thumbnails/extra.png",
+                alt: "Inspire Extra Laracasts Wallpaper"
+              }
+            })
           ]),
           _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass:
-                "border border-grey-light px-8 py-2 rounded-full text-black font-bold text-xs",
-              attrs: { href: "/images/wallpapers/inspire-me.png" }
-            },
-            [_vm._v("inspire-me.png")]
-          )
-        ])
-      ])
+          _c("div", { staticClass: "flex justify-between items-center" }, [
+            _c("h2", { staticClass: "font-normal text-base" }, [
+              _vm._v("Extra")
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "button",
+                attrs: { href: "/images/wallpapers/extra.png" }
+              },
+              [_vm._v("\n                extra.png\n            ")]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "mb-12", staticStyle: { "max-width": "439px" } },
+        [
+          _c("a", { attrs: { href: "/images/wallpapers/inspire-me.png" } }, [
+            _c("img", {
+              staticClass: "mb-4",
+              attrs: {
+                src: "/images/wallpapers/thumbnails/inspire-me.png",
+                alt: "Inspire Extra Laracasts Wallpaper"
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex justify-between items-center" }, [
+            _c("h2", { staticClass: "font-normal text-base" }, [
+              _vm._v("Inspire Me")
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "button",
+                attrs: { href: "/images/wallpapers/inspire-me.png" }
+              },
+              [_vm._v("\n                inspire-me.png\n            ")]
+            )
+          ])
+        ]
+      )
     ])
   }
 ]
@@ -17378,75 +17808,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/LoadersAndAnimations.vue":
-/*!**********************************************************!*\
-  !*** ./resources/js/components/LoadersAndAnimations.vue ***!
-  \**********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _LoadersAndAnimations_vue_vue_type_template_id_10167db1___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LoadersAndAnimations.vue?vue&type=template&id=10167db1& */ "./resources/js/components/LoadersAndAnimations.vue?vue&type=template&id=10167db1&");
-/* harmony import */ var _LoadersAndAnimations_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LoadersAndAnimations.vue?vue&type=script&lang=js& */ "./resources/js/components/LoadersAndAnimations.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _LoadersAndAnimations_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _LoadersAndAnimations_vue_vue_type_template_id_10167db1___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _LoadersAndAnimations_vue_vue_type_template_id_10167db1___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/LoadersAndAnimations.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/LoadersAndAnimations.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************!*\
-  !*** ./resources/js/components/LoadersAndAnimations.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LoadersAndAnimations_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./LoadersAndAnimations.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/LoadersAndAnimations.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LoadersAndAnimations_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/LoadersAndAnimations.vue?vue&type=template&id=10167db1&":
-/*!*****************************************************************************************!*\
-  !*** ./resources/js/components/LoadersAndAnimations.vue?vue&type=template&id=10167db1& ***!
-  \*****************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LoadersAndAnimations_vue_vue_type_template_id_10167db1___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./LoadersAndAnimations.vue?vue&type=template&id=10167db1& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/LoadersAndAnimations.vue?vue&type=template&id=10167db1&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LoadersAndAnimations_vue_vue_type_template_id_10167db1___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LoadersAndAnimations_vue_vue_type_template_id_10167db1___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
 /***/ "./resources/js/components/Logo.vue":
 /*!******************************************!*\
   !*** ./resources/js/components/Logo.vue ***!
@@ -17876,9 +18237,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Typography__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Typography */ "./resources/js/components/Typography.vue");
 /* harmony import */ var _components_Mascot__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Mascot */ "./resources/js/components/Mascot.vue");
 /* harmony import */ var _components_Illustrations__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Illustrations */ "./resources/js/components/Illustrations.vue");
-/* harmony import */ var _components_LoadersAndAnimations__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/LoadersAndAnimations */ "./resources/js/components/LoadersAndAnimations.vue");
-/* harmony import */ var _components_Wallpapers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Wallpapers */ "./resources/js/components/Wallpapers.vue");
-/* harmony import */ var _components_NotFound__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/NotFound */ "./resources/js/components/NotFound.vue");
+/* harmony import */ var _components_Wallpapers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Wallpapers */ "./resources/js/components/Wallpapers.vue");
+/* harmony import */ var _components_NotFound__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/NotFound */ "./resources/js/components/NotFound.vue");
 
 
 
@@ -17887,13 +18247,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+var LoadersAndAnimations = function LoadersAndAnimations() {
+  return Promise.all(/*! import() | loaders-and-animations.bundle */[__webpack_require__.e("vendors~loaders-and-animations.bundle"), __webpack_require__.e("loaders-and-animations.bundle")]).then(__webpack_require__.bind(null, /*! ./components/LoadersAndAnimations */ "./resources/js/components/LoadersAndAnimations.vue"));
+};
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mode: 'history',
   linkActiveClass: 'font-bold',
   routes: [{
     path: '*',
-    component: _components_NotFound__WEBPACK_IMPORTED_MODULE_8__["default"]
+    component: _components_NotFound__WEBPACK_IMPORTED_MODULE_7__["default"]
   }, {
     path: '/',
     component: _components_Logo__WEBPACK_IMPORTED_MODULE_0__["default"]
@@ -17914,10 +18278,10 @@ __webpack_require__.r(__webpack_exports__);
     component: _components_Illustrations__WEBPACK_IMPORTED_MODULE_5__["default"]
   }, {
     path: '/loaders-and-animations',
-    component: _components_LoadersAndAnimations__WEBPACK_IMPORTED_MODULE_6__["default"]
+    component: LoadersAndAnimations
   }, {
     path: '/wallpapers',
-    component: _components_Wallpapers__WEBPACK_IMPORTED_MODULE_7__["default"]
+    component: _components_Wallpapers__WEBPACK_IMPORTED_MODULE_6__["default"]
   }]
 });
 

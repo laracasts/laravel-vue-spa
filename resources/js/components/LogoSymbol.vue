@@ -16,11 +16,9 @@
             <div class="flex justify-between items-center">
                 <p>Original symbol on <strong>white</strong> background</p>
 
-                <a
-                    href="/images/logo.svg"
-                    class="border border-grey-light px-8 py-2 rounded-full text-black font-bold text-xs"
-                    >symbol-original.svg</a
-                >
+                <a href="/images/logo.svg" class="button">
+                    symbol-original.svg
+                </a>
             </div>
         </div>
 
@@ -39,11 +37,9 @@
                     <strong>dark</strong> background
                 </p>
 
-                <a
-                    href="/images/symbol-negative.svg"
-                    class="border border-grey-light px-8 py-2 rounded-full text-black font-bold text-xs"
-                    >symbol-negative.svg</a
-                >
+                <a href="/images/symbol-negative.svg" class="button">
+                    symbol-negative.svg
+                </a>
             </div>
         </div>
 
@@ -59,11 +55,9 @@
             <div class="flex justify-between items-center">
                 <p>Pure negative symbol on <strong>dark</strong> background</p>
 
-                <a
-                    href="/images/symbol-pure-negative.svg"
-                    class="border border-grey-light px-8 py-2 rounded-full text-black font-bold text-xs"
-                    >symbol-pure-negative.svg</a
-                >
+                <a href="/images/symbol-pure-negative.svg" class="button">
+                    symbol-pure-negative.svg
+                </a>
             </div>
         </div>
     </div>

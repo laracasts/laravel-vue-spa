@@ -538,8 +538,33 @@ table {
  * @import "components/forms";
  */
 
+.button {
+  border-width: 1px;
+  border-color: #dedede;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  border-radius: 9999px;
+  color: #222;
+  font-weight: 700;
+  font-size: .75rem;
+  transition: all .3s;
+}
+
+.button:hover {
+  background-color: #328af1;
+  border-color: #328af1;
+  color: #fff;
+}
+
 a {
   text-decoration: none;
+  font-weight: 300;
+}
+
+p {
+  font-weight: 300;
 }
 
 .container {
@@ -780,7 +805,7 @@ a {
 }
 
 .bg-blue-light {
-  background-color: #6cb2eb;
+  background-color: #328af1;
 }
 
 .bg-blue-lighter {
@@ -1072,7 +1097,7 @@ a {
 }
 
 .hover\:bg-blue-light:hover {
-  background-color: #6cb2eb;
+  background-color: #328af1;
 }
 
 .hover\:bg-blue-lighter:hover {
@@ -1364,7 +1389,7 @@ a {
 }
 
 .focus\:bg-blue-light:focus {
-  background-color: #6cb2eb;
+  background-color: #328af1;
 }
 
 .focus\:bg-blue-lighter:focus {
@@ -1728,7 +1753,7 @@ a {
 }
 
 .border-blue-light {
-  border-color: #6cb2eb;
+  border-color: #328af1;
 }
 
 .border-blue-lighter {
@@ -2020,7 +2045,7 @@ a {
 }
 
 .hover\:border-blue-light:hover {
-  border-color: #6cb2eb;
+  border-color: #328af1;
 }
 
 .hover\:border-blue-lighter:hover {
@@ -2312,7 +2337,7 @@ a {
 }
 
 .focus\:border-blue-light:focus {
-  border-color: #6cb2eb;
+  border-color: #328af1;
 }
 
 .focus\:border-blue-lighter:focus {
@@ -3147,6 +3172,10 @@ a {
 
 .leading-normal {
   line-height: 1.5;
+}
+
+.leading-relaxed {
+  line-height: 2;
 }
 
 .leading-loose {
@@ -5071,7 +5100,7 @@ a {
 }
 
 .text-blue-light {
-  color: #6cb2eb;
+  color: #328af1;
 }
 
 .text-blue-lighter {
@@ -5363,7 +5392,7 @@ a {
 }
 
 .hover\:text-blue-light:hover {
-  color: #6cb2eb;
+  color: #328af1;
 }
 
 .hover\:text-blue-lighter:hover {
@@ -5655,7 +5684,7 @@ a {
 }
 
 .focus\:text-blue-light:focus {
-  color: #6cb2eb;
+  color: #328af1;
 }
 
 .focus\:text-blue-lighter:focus {
@@ -6404,7 +6433,7 @@ a {
   }
 
   .sm\:bg-blue-light {
-    background-color: #6cb2eb;
+    background-color: #328af1;
   }
 
   .sm\:bg-blue-lighter {
@@ -6696,7 +6725,7 @@ a {
   }
 
   .sm\:hover\:bg-blue-light:hover {
-    background-color: #6cb2eb;
+    background-color: #328af1;
   }
 
   .sm\:hover\:bg-blue-lighter:hover {
@@ -6988,7 +7017,7 @@ a {
   }
 
   .sm\:focus\:bg-blue-light:focus {
-    background-color: #6cb2eb;
+    background-color: #328af1;
   }
 
   .sm\:focus\:bg-blue-lighter:focus {
@@ -7344,7 +7373,7 @@ a {
   }
 
   .sm\:border-blue-light {
-    border-color: #6cb2eb;
+    border-color: #328af1;
   }
 
   .sm\:border-blue-lighter {
@@ -7636,7 +7665,7 @@ a {
   }
 
   .sm\:hover\:border-blue-light:hover {
-    border-color: #6cb2eb;
+    border-color: #328af1;
   }
 
   .sm\:hover\:border-blue-lighter:hover {
@@ -7928,7 +7957,7 @@ a {
   }
 
   .sm\:focus\:border-blue-light:focus {
-    border-color: #6cb2eb;
+    border-color: #328af1;
   }
 
   .sm\:focus\:border-blue-lighter:focus {
@@ -8763,6 +8792,10 @@ a {
 
   .sm\:leading-normal {
     line-height: 1.5;
+  }
+
+  .sm\:leading-relaxed {
+    line-height: 2;
   }
 
   .sm\:leading-loose {
@@ -10671,7 +10704,7 @@ a {
   }
 
   .sm\:text-blue-light {
-    color: #6cb2eb;
+    color: #328af1;
   }
 
   .sm\:text-blue-lighter {
@@ -10963,7 +10996,7 @@ a {
   }
 
   .sm\:hover\:text-blue-light:hover {
-    color: #6cb2eb;
+    color: #328af1;
   }
 
   .sm\:hover\:text-blue-lighter:hover {
@@ -11255,7 +11288,7 @@ a {
   }
 
   .sm\:focus\:text-blue-light:focus {
-    color: #6cb2eb;
+    color: #328af1;
   }
 
   .sm\:focus\:text-blue-lighter:focus {
@@ -11990,7 +12023,7 @@ a {
   }
 
   .md\:bg-blue-light {
-    background-color: #6cb2eb;
+    background-color: #328af1;
   }
 
   .md\:bg-blue-lighter {
@@ -12282,7 +12315,7 @@ a {
   }
 
   .md\:hover\:bg-blue-light:hover {
-    background-color: #6cb2eb;
+    background-color: #328af1;
   }
 
   .md\:hover\:bg-blue-lighter:hover {
@@ -12574,7 +12607,7 @@ a {
   }
 
   .md\:focus\:bg-blue-light:focus {
-    background-color: #6cb2eb;
+    background-color: #328af1;
   }
 
   .md\:focus\:bg-blue-lighter:focus {
@@ -12930,7 +12963,7 @@ a {
   }
 
   .md\:border-blue-light {
-    border-color: #6cb2eb;
+    border-color: #328af1;
   }
 
   .md\:border-blue-lighter {
@@ -13222,7 +13255,7 @@ a {
   }
 
   .md\:hover\:border-blue-light:hover {
-    border-color: #6cb2eb;
+    border-color: #328af1;
   }
 
   .md\:hover\:border-blue-lighter:hover {
@@ -13514,7 +13547,7 @@ a {
   }
 
   .md\:focus\:border-blue-light:focus {
-    border-color: #6cb2eb;
+    border-color: #328af1;
   }
 
   .md\:focus\:border-blue-lighter:focus {
@@ -14349,6 +14382,10 @@ a {
 
   .md\:leading-normal {
     line-height: 1.5;
+  }
+
+  .md\:leading-relaxed {
+    line-height: 2;
   }
 
   .md\:leading-loose {
@@ -16257,7 +16294,7 @@ a {
   }
 
   .md\:text-blue-light {
-    color: #6cb2eb;
+    color: #328af1;
   }
 
   .md\:text-blue-lighter {
@@ -16549,7 +16586,7 @@ a {
   }
 
   .md\:hover\:text-blue-light:hover {
-    color: #6cb2eb;
+    color: #328af1;
   }
 
   .md\:hover\:text-blue-lighter:hover {
@@ -16841,7 +16878,7 @@ a {
   }
 
   .md\:focus\:text-blue-light:focus {
-    color: #6cb2eb;
+    color: #328af1;
   }
 
   .md\:focus\:text-blue-lighter:focus {
@@ -17576,7 +17613,7 @@ a {
   }
 
   .lg\:bg-blue-light {
-    background-color: #6cb2eb;
+    background-color: #328af1;
   }
 
   .lg\:bg-blue-lighter {
@@ -17868,7 +17905,7 @@ a {
   }
 
   .lg\:hover\:bg-blue-light:hover {
-    background-color: #6cb2eb;
+    background-color: #328af1;
   }
 
   .lg\:hover\:bg-blue-lighter:hover {
@@ -18160,7 +18197,7 @@ a {
   }
 
   .lg\:focus\:bg-blue-light:focus {
-    background-color: #6cb2eb;
+    background-color: #328af1;
   }
 
   .lg\:focus\:bg-blue-lighter:focus {
@@ -18516,7 +18553,7 @@ a {
   }
 
   .lg\:border-blue-light {
-    border-color: #6cb2eb;
+    border-color: #328af1;
   }
 
   .lg\:border-blue-lighter {
@@ -18808,7 +18845,7 @@ a {
   }
 
   .lg\:hover\:border-blue-light:hover {
-    border-color: #6cb2eb;
+    border-color: #328af1;
   }
 
   .lg\:hover\:border-blue-lighter:hover {
@@ -19100,7 +19137,7 @@ a {
   }
 
   .lg\:focus\:border-blue-light:focus {
-    border-color: #6cb2eb;
+    border-color: #328af1;
   }
 
   .lg\:focus\:border-blue-lighter:focus {
@@ -19935,6 +19972,10 @@ a {
 
   .lg\:leading-normal {
     line-height: 1.5;
+  }
+
+  .lg\:leading-relaxed {
+    line-height: 2;
   }
 
   .lg\:leading-loose {
@@ -21843,7 +21884,7 @@ a {
   }
 
   .lg\:text-blue-light {
-    color: #6cb2eb;
+    color: #328af1;
   }
 
   .lg\:text-blue-lighter {
@@ -22135,7 +22176,7 @@ a {
   }
 
   .lg\:hover\:text-blue-light:hover {
-    color: #6cb2eb;
+    color: #328af1;
   }
 
   .lg\:hover\:text-blue-lighter:hover {
@@ -22427,7 +22468,7 @@ a {
   }
 
   .lg\:focus\:text-blue-light:focus {
-    color: #6cb2eb;
+    color: #328af1;
   }
 
   .lg\:focus\:text-blue-lighter:focus {
@@ -23162,7 +23203,7 @@ a {
   }
 
   .xl\:bg-blue-light {
-    background-color: #6cb2eb;
+    background-color: #328af1;
   }
 
   .xl\:bg-blue-lighter {
@@ -23454,7 +23495,7 @@ a {
   }
 
   .xl\:hover\:bg-blue-light:hover {
-    background-color: #6cb2eb;
+    background-color: #328af1;
   }
 
   .xl\:hover\:bg-blue-lighter:hover {
@@ -23746,7 +23787,7 @@ a {
   }
 
   .xl\:focus\:bg-blue-light:focus {
-    background-color: #6cb2eb;
+    background-color: #328af1;
   }
 
   .xl\:focus\:bg-blue-lighter:focus {
@@ -24102,7 +24143,7 @@ a {
   }
 
   .xl\:border-blue-light {
-    border-color: #6cb2eb;
+    border-color: #328af1;
   }
 
   .xl\:border-blue-lighter {
@@ -24394,7 +24435,7 @@ a {
   }
 
   .xl\:hover\:border-blue-light:hover {
-    border-color: #6cb2eb;
+    border-color: #328af1;
   }
 
   .xl\:hover\:border-blue-lighter:hover {
@@ -24686,7 +24727,7 @@ a {
   }
 
   .xl\:focus\:border-blue-light:focus {
-    border-color: #6cb2eb;
+    border-color: #328af1;
   }
 
   .xl\:focus\:border-blue-lighter:focus {
@@ -25521,6 +25562,10 @@ a {
 
   .xl\:leading-normal {
     line-height: 1.5;
+  }
+
+  .xl\:leading-relaxed {
+    line-height: 2;
   }
 
   .xl\:leading-loose {
@@ -27429,7 +27474,7 @@ a {
   }
 
   .xl\:text-blue-light {
-    color: #6cb2eb;
+    color: #328af1;
   }
 
   .xl\:text-blue-lighter {
@@ -27721,7 +27766,7 @@ a {
   }
 
   .xl\:hover\:text-blue-light:hover {
-    color: #6cb2eb;
+    color: #328af1;
   }
 
   .xl\:hover\:text-blue-lighter:hover {
@@ -28013,7 +28058,7 @@ a {
   }
 
   .xl\:focus\:text-blue-light:focus {
-    color: #6cb2eb;
+    color: #328af1;
   }
 
   .xl\:focus\:text-blue-lighter:focus {

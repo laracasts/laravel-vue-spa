@@ -36,32 +36,32 @@
 
             <div class="flex">
                 <color-range
-                    from="#EC454F"
-                    to="#F44881"
+                    to="#EC454F"
+                    from="#F44881"
                     name="Laravel"
                 ></color-range>
 
                 <color-range
-                    from="#637BFF"
-                    to="#21C8F6"
+                    to="#637BFF"
+                    from="#21C8F6"
                     name="PHP"
                 ></color-range>
 
                 <color-range
-                    from="#50A88D"
-                    to="#6EDCC4"
+                    to="#50A88D"
+                    from="#6EDCC4"
                     name="Testing"
                 ></color-range>
 
                 <color-range
-                    from="#E59D3E"
-                    to="#F19A1A"
+                    to="#E59D3E"
+                    from="#F19A1A"
                     name="JavaScript"
                 ></color-range>
 
                 <color-range
-                    from="#8465E5"
-                    to="#AA76B9"
+                    to="#8465E5"
+                    from="#AA76B9"
                     name="Tooling"
                 ></color-range>
             </div>

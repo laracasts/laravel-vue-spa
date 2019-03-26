@@ -99,7 +99,7 @@ let colors = {
   'blue-darker': '#1c3d5a',
   'blue-dark': '#2779bd',
   blue: '#1747b0',
-  'blue-light': '#6cb2eb',
+  'blue-light': '#328af1',
   'blue-lighter': '#bcdefa',
   'blue-lightest': '#eff8ff',
 
@@ -304,6 +304,7 @@ module.exports = {
     none: 1,
     tight: 1.25,
     normal: 1.5,
+    relaxed: 2,
     loose: '40px'
   },
 

@@ -12,14 +12,12 @@
                     class="mb-4"
                 />
 
-                <a
-                    href="/images/mascot/larydefault.svg"
-                    class="border border-grey-light px-8 py-2 rounded-full text-black font-bold text-xs"
-                    >larydefault.svg</a
-                >
+                <a href="/images/mascot/larydefault.svg" class="button">
+                    larydefault.svg
+                </a>
             </div>
 
-            <p class="leading-normal w-64 mt-8">
+            <p class="leading-relaxed w-64 mt-8">
                 Quirky. Dynamic. Smartsy. He’s got it all. Who wouldn’t want
                 him?
             </p>
