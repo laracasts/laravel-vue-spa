@@ -12,7 +12,7 @@
                     <div
                         class="rounded-full bg-blue shadow w-18 h-18 mb-3"
                     ></div>
-                    <p class="text-xs">#328AF1</p>
+                    <p class="text-xs">#1747b0</p>
                 </div>
 
                 <div class="text-center mr-8">
